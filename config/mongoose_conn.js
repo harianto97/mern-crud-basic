@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
+require("dotenv").config();
 
-const url = 'mongodb+srv://user1:pwduser1@cluster0.8zl2y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-mongoose.connect(url);
+mongoose.connect(
+    process.env.MONGODB_CONNECTION_STRING,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    } 
+);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection Error'));
 db.once('open', ()=>console.log('Koneksi ke database berhasil'));
